@@ -39,8 +39,8 @@ gpxWpt i = unode "wpt" (latLon, [name, ext])
         dist = GH.iDistance i
         time = GH.iTime i
         exts =
-            [ lnode "rteDistance" (show dist) ] ++
-            [ lnode "rteTime" (show time) | time /= 0 ] ++
+            [ lnode "rteDistance" (show $ (round dist :: Int)) ] ++
+            [ lnode "rteTime" (show $ (round time :: Int)) | time /= 0 ] ++
             [ lnode "rteSpeed" (show $ dist / time) | time /= 0 ] ++
             [ lnode "rtePointAction" (show $ pointAction $ GH.iSign i) ]
 

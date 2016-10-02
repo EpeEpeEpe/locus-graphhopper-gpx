@@ -132,6 +132,10 @@
 		}
 	}
 
+	function stripName( n ) {
+		return n.replace( /At roundabout.*?onto |Turn (?:slight |sharp )?(?:left|right)(?: onto )?|Continue(?: onto )?/g, '' );
+	}
+
 	function jsonToLocusGPXDownload( json ) {
 		var path = json.paths[0];
 		var is = path.instructions;
@@ -154,7 +158,8 @@
 				wpt.setAttribute( 'lat', p[ 1 ] );
 				wpt.setAttribute( 'lon', p[ 0 ] );
 
-				wpt.appendChild( ǤŦ( 'name', i.text ) );
+				var name = stripName( i.text );
+				wpt.appendChild( ǤŦ( 'name', name ) );
 
 				var ext = Ǥ( 'extensions' );
 				{
@@ -164,7 +169,7 @@
 						ext.appendChild( ŁŦ( 'rteSpeed', i.distance * 1000 / i.time ) );
 					}
 					ext.appendChild( ŁŦ( 'rtePointAction', pointAction( i ) ) );
-					ext.appendChild( ŁŦ( 'rteStreet', i.text ) );
+					ext.appendChild( ŁŦ( 'rteStreet', name ) );
 				}
 				wpt.appendChild( ext );
 			}

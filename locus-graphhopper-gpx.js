@@ -132,14 +132,22 @@ function jsonToLocusGPXDownload( json ) {
 }
 
 function jsonToLocusGPXMain() {
-	if (!XMLHttpRequest.hasLocusSend) {
-		XMLHttpRequest.hasLocusSend = 1;
+	if (!XMLHttpRequest.hasLocusHooks) {
+		XMLHttpRequest.hasLocusHooks = 1;
+
 		var oldSend = XMLHttpRequest.prototype.send;
 		XMLHttpRequest.prototype.send = function () {
 			this.addEventListener("load", function () {
 				jsonToLocusGPXDownload(JSON.parse(this.responseText))
 			})
 			oldSend.apply(this, arguments);
+		}
+
+		var oldOpen = XMLHttpRequest.prototype.open;
+		XMLHttpRequest.prototype.open = function () {
+			var args = arguments;
+			args[1] = args[1].replace(/\blocale=\w+/, "locale=en");
+			oldOpen.apply(this, args);
 		}
 	}
 	$('#searchButton')[0].click()

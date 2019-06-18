@@ -114,19 +114,24 @@
 
 	function pointAction( i ) {
 		switch ( i.sign ) {
-			case -3: return 5;  // TURN_SHARP_LEFT
-			case -2: return 4;  // TURN_LEFT
-			case -1: return 3;  // TURN_SLIGHT_LEFT
-			case  0: return 2;  // CONTINUE_ON_STREET
-			case  1: return 6;  // TURN_SLIGHT_RIGHT
-			case  2: return 7;  // TURN_RIGHT
-			case  3: return 8;  // TURN_SHARP_RIGHT
-			case  4: return 24; // FINISH
-			case  5: return 50; // REACHED_VIA
-			case  6: // USE_ROUNDABOUT
+			case -98: return 12; // U_TURN_UNKNOWN - U_TURN
+			case  -8: return 13; // U_TURN_LEFT - U_TURN_LEFT
+			case  -7: return 9;  // KEEP_LEFT - STAY_LEFT
+			case  -3: return 5;  // TURN_SHARP_LEFT - LEFT_SHARP
+			case  -2: return 4;  // TURN_LEFT - LEFT
+			case  -1: return 3;  // TURN_SLIGHT_LEFT - LEFT_SLIGHT
+			case   0: return 2;  // CONTINUE_ON_STREET - NO_MANEUVER_NAME_CHANGE
+			case   1: return 6;  // TURN_SLIGHT_RIGHT - RIGHT_SLIGHT
+			case   2: return 7;  // TURN_RIGHT - RIGHT
+			case   3: return 8;  // TURN_SHARP_RIGHT - RIGHT_SHARP
+			case   4: return 24; // FINISH - ARRIVE_DEST
+			case   5: return 50; // REACHED_VIA - PASS_PLACE
+			case   6:            // USE_ROUNDABOUT - ROUNDABOUT_EXIT_1..ROUNDABOUT_EXIT_8
 				if ( i.exit_number >= 1 && i.exit_number <= 8 ) {
 					return 26 + i.exit_number;
 				}
+			case   7: return 10; // KEEP_RIGHT - STAY_RIGHT
+			case   8: return 14; // U_TURN_RIGHT - U_TURN_RIGHT
 			default:
 				throw "signToPointAction: " + i.sign + " unsupported";
 		}

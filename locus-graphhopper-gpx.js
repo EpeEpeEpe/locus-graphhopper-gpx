@@ -5,7 +5,7 @@
  *
  * BOOKMARKLET:
  *
- *  javascript:$('body').append($("<script src='https://rawgit.com/liskin/locus-graphhopper-gpx/master/locus-graphhopper-gpx.js'></script>"))
+ *  javascript:$('body').append($("<script src='https://cdn.jsdelivr.net/gh/liskin/locus-graphhopper-gpx@master/locus-graphhopper-gpx.js'></script>"))
  *
  * LICENSE:
  *
